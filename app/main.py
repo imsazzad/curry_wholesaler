@@ -19,6 +19,9 @@ if __name__ == '__main__':
 
     else:
         order: Order = transform_order_info(lines, total_recipe, total_customer)
-
         curries = prepare_curry(order)
+        if not curries:
+            logging.info(NO_SOLUTION_MSG)
+        else:
+            logging.info(" ".join(curries))
 
