@@ -1,26 +1,14 @@
 import logging
 from typing import Optional
 from copy import deepcopy
-
 from constants import VEGETARIAN, MEAT
+from curry_info import CurryInfo
+from customer_info import CustomerInfo
 from order import Order
-
 logging.basicConfig(level=logging.DEBUG)
 
 
-class CustomerInfo:
-    def __init__(self, idx=None, num_of_preference=float("inf")):
-        self.idx = idx
-        self.num_of_preference = num_of_preference
-
-
-class CurryInfo:
-    def __init__(self, curry_number: int = -1, curry_name: str = None):
-        self.curry_number = curry_number
-        self.curry_name = curry_name
-
-
-def pick_next_customer_to_be_made_happy(customers_info) -> CustomerInfo:
+def get_next_customer(customers_info:dict) -> CustomerInfo:
     next_customer = CustomerInfo()
     for key in customers_info:
         if len(customers_info[key]) < next_customer.num_of_preference:
@@ -43,7 +31,6 @@ def get_next_curry_number(current_customer_info) -> CurryInfo:
 
 def update_customer_preferences(order: Order, curry_number):
     updated_customers_preferences = order.customers_info.copy()
-
     if curry_number in order.meat_preference:
         for customer_id in order.meat_preference[curry_number]:
             if customer_id in updated_customers_preferences:
@@ -59,57 +46,62 @@ def update_customer_preferences(order: Order, curry_number):
 
 def update_order(order: Order, happy_customer_ids: list, next_curry_number):
     updated_order = deepcopy(order)
-
-    for customer_id in happy_customer_ids:
-        updated_order.customers_info.pop(customer_id, None)
-        for curry_num in updated_order.meat_preference:
-            updated_order.meat_preference[curry_num].discard(customer_id)
-        for curry_num in updated_order.veg_preference:
-            updated_order.veg_preference[curry_num].discard(customer_id)
-
+    remove_happy_customer_info(happy_customer_ids, updated_order)
     updated_order.customers_info = update_customer_preferences(updated_order, next_curry_number)
     updated_order.meat_preference.pop(next_curry_number, None)
     updated_order.veg_preference.pop(next_curry_number, None)
-
     return updated_order
 
 
+def remove_happy_customer_info(happy_customer_ids, order):
+    for customer_id in happy_customer_ids:
+        order.customers_info.pop(customer_id, None)
+        for curry_num in order.meat_preference:
+            order.meat_preference[curry_num].discard(customer_id)
+        for curry_num in order.veg_preference:
+            order.veg_preference[curry_num].discard(customer_id)
+
+
 def prepare_curry(order: Order) -> Optional[list]:
-    curries_list: list = [VEGETARIAN for _ in range(order.total_recipe + 1)]
-    happy_customer = 0
+    curries_list: list = [VEGETARIAN for _ in range(order.total_recipe)]
+    num_of_happy_customer = 0
+    log_updated_information(num_of_happy_customer, order)
 
-    log_updated_information(happy_customer, order)
-
-    while happy_customer < order.total_customer and len(order.customers_info) > 0:
-        next_customer = pick_next_customer_to_be_made_happy(order.customers_info)
+    while num_of_happy_customer < order.total_customer and len(order.customers_info) > 0:
+        next_customer = get_next_customer(order.customers_info)
         if next_customer.num_of_preference <= 0:
             break
 
-        next_customer_info = order.customers_info[next_customer.idx]
-        logging.debug("customer_to_be_picked_next - {} - {}".format(next_customer.idx, next_customer_info))
-
-        next_curry_info = get_next_curry_number(next_customer_info)
-        logging.debug("curry to be picked for this customer -{} ".format((vars(next_curry_info))))
-
+        next_curry_info, next_customer_info = get_next_customer_and_curry_number(next_customer, order)
         curry_name = next_customer_info[next_curry_info.curry_number]
-        curries_list[next_curry_info.curry_number] = curry_name
+        curries_list[next_curry_info.curry_number - 1] = curry_name
+        num_of_happy_customer, order = update_all_relevant_info(curry_name, next_curry_info,
+                                                                num_of_happy_customer, order)
+    return curries_list if order.total_customer == num_of_happy_customer else None
 
-        if curry_name == "M":
-            happy_customer_ids = order.meat_preference[next_curry_info.curry_number]
-        else:
-            happy_customer_ids = order.veg_preference[next_curry_info.curry_number]
 
-        logging.debug("happy_customer_ids - {} ".format(happy_customer_ids))
+def update_all_relevant_info(curry_name, next_curry_info, num_of_happy_customer, order):
+    happy_customer_ids = get_happy_customers_id(curry_name, next_curry_info, order)
+    num_of_happy_customer += len(happy_customer_ids)
+    order = update_order(order, happy_customer_ids, next_curry_info.curry_number)
+    log_updated_information(num_of_happy_customer, order)
+    return num_of_happy_customer, order
 
-        happy_customer += len(happy_customer_ids)
-        order = update_order(order, happy_customer_ids, next_curry_info.curry_number)
-        log_updated_information(happy_customer, order)
-        logging.debug("current curries - {} ".format(curries_list[1:]))
 
-    if order.total_customer != happy_customer:
-        return None
+def get_next_customer_and_curry_number(next_customer, order):
+    next_customer_info = order.customers_info[next_customer.idx]
+    next_curry_info = get_next_curry_number(next_customer_info)
+    logging.debug("customer_to_be_picked_next - {} - {}".format(next_customer.idx, next_customer_info))
+    logging.debug("curry to be picked for this customer -{} ".format((vars(next_curry_info))))
+    return next_curry_info, next_customer_info
+
+
+def get_happy_customers_id(curry_name, next_curry_info, order):
+    if curry_name == MEAT:
+        happy_customer_ids = order.meat_preference[next_curry_info.curry_number]
     else:
-        return curries_list[1:]
+        happy_customer_ids = order.veg_preference[next_curry_info.curry_number]
+    return happy_customer_ids
 
 
 def log_updated_information(happy_customer:int, order:Order):

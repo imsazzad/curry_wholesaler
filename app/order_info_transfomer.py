@@ -1,3 +1,4 @@
+from constants import MEAT
 from order import Order
 
 
@@ -9,7 +10,7 @@ def prepare_choices(a_customer_choice: str, customer_id: int, meat_pref: dict, v
     while idx + 1 < len(choice_array):
         choice_dict[int(choice_array[idx])] = choice_array[idx + 1]
 
-        if choice_array[idx + 1] == "M":
+        if choice_array[idx + 1] == MEAT:
             meat_pref.setdefault(int(choice_array[idx]), set()).add(customer_id)
         else:
             veg_pref.setdefault(int(choice_array[idx]), set()).add(customer_id)

@@ -6,7 +6,6 @@ from input_validity_checker import check_input_validity
 from utils.argument_parser import parse_args_and_load_vars
 from utils.reader.text_file_reader import TextFileReader
 from constants import NO_SOLUTION_MSG
-
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
