@@ -2,7 +2,7 @@ import logging
 from typing import Optional
 from copy import deepcopy
 
-from curry_names import VEGETARIAN, MEAT
+from constants import VEGETARIAN, MEAT
 from order import Order
 
 logging.basicConfig(level=logging.DEBUG)
@@ -90,8 +90,6 @@ def prepare_curry(order: Order) -> Optional[list]:
 
         next_curry_info = get_next_curry_number(next_customer_info)
         logging.debug("curry to be picked for this customer -{} ".format((vars(next_curry_info))))
-        if next_curry_info.curry_number == -1:  # customer curry_like_list is empty
-            break
 
         curry_name = next_customer_info[next_curry_info.curry_number]
         curries_list[next_curry_info.curry_number] = curry_name
