@@ -1,0 +1,1 @@
+`python3 app/main.py -f input1.txt`
