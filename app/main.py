@@ -10,9 +10,7 @@ import logging
 logging.basicConfig(level=logging.DEBUG)
 
 
-if __name__ == '__main__':
-    args = parse_args_and_load_vars()
-    lines = TextFileReader().read(args.input_file)
+def main(lines: list):
     is_invalid_input, total_recipe, total_customer = check_input_validity(lines)
     if is_invalid_input:
         logging.info(NO_SOLUTION_MSG)
@@ -23,5 +21,12 @@ if __name__ == '__main__':
         if not curries:
             logging.info(NO_SOLUTION_MSG)
         else:
+            logging.info("Final Curry list is :-")
             logging.info(" ".join(curries))
+
+
+if __name__ == '__main__':
+    args = parse_args_and_load_vars()
+    line_arr: list = TextFileReader().read(args.input_file)
+    main(line_arr)
 
