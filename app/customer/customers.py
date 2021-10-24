@@ -1,8 +1,8 @@
 import logging
 
-from app.curry.curries import get_next_curry_number
-from app.customer.customer_info import CustomerInfo
-from app.order.orders import Order
+from curry.curries import get_next_curry_number
+from customer.customer_info import CustomerInfo
+from order.orders import Order
 
 
 def update_customer_preferences(order: Order, curry_number):

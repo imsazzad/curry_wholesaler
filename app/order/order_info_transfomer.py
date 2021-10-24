@@ -1,4 +1,4 @@
-from app.order.orders import Order
+from order.orders import Order
 from constants import MEAT
 
 

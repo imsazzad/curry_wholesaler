@@ -1,11 +1,11 @@
 import logging
 from typing import Optional
 
-from app.constants import VEGETARIAN
-from app.customer.customers import get_next_customer, get_next_customer_and_curry_number
-from app.customer.happy_customers import get_happy_customers_id
-from app.order.order_processor import update_order
-from app.order.orders import Order
+from constants import VEGETARIAN
+from customer.customers import get_next_customer, get_next_customer_and_curry_number
+from customer.happy_customers import get_happy_customers_id
+from order.order_processor import update_order
+from order.orders import Order
 
 logging.basicConfig(level=logging.DEBUG)
 

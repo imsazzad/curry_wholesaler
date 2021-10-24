@@ -1,5 +1,5 @@
-from app.constants import VEGETARIAN, MEAT
-from app.curry.curry_info import CurryInfo
+from constants import VEGETARIAN, MEAT
+from curry.curry_info import CurryInfo
 
 
 def get_next_curry_number(current_customer_info) -> CurryInfo:

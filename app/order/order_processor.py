@@ -1,8 +1,8 @@
 from copy import deepcopy
 
-from app.customer.customers import update_customer_preferences
-from app.customer.happy_customers import remove_happy_customer_info
-from app.order.orders import Order
+from customer.customers import update_customer_preferences
+from customer.happy_customers import remove_happy_customer_info
+from order.orders import Order
 
 
 def update_order(order: Order, happy_customer_ids: list, next_curry_number):
