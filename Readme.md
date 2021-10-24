@@ -8,10 +8,11 @@ Please Read the **docs/Algorithom Documentation.md** to get details about
 
 
 ## How to run Training
-run the following command from project root
+run one of following commands from project root
 - -f for input file
 
 `python3 app/main.py -f data/input1.txt`
+`python3 app/main.py -f data/input4.txt`
 
 
 Folder Structure
@@ -35,8 +36,14 @@ Folder Structure
     .
     ├── ...
     ├── app
-    │   ├── __init__.py
-    │   └── to be written                               
+    │   ├── __init__.py             
+    │   ├── curry               # all curry related methods, codes
+    │   ├── customer            # all customer related methods, codes        
+    │   ├── order               # all order/preference related methods, codes
+    │   ├── utils               # argument parser, txt file reader
+    │   ├── constants.py        # constants and msg
+    │   ├── input_validator.py  # checks if valid input data or not
+    │   └── main.py             # main scripts                  
     └── ...
 
 
