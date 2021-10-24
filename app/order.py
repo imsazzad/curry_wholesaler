@@ -11,5 +11,3 @@ class Order:
         self.veg_preference = veg_preference
         self.total_recipe = total_recipe
         self.total_customer = total_customer
-
-

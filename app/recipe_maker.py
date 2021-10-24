@@ -1,6 +1,7 @@
 import logging
-from typing import Optional
 from copy import deepcopy
+from typing import Optional
+
 from constants import VEGETARIAN, MEAT
 from curry_info import CurryInfo
 from customer_info import CustomerInfo

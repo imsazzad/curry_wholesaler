@@ -1,12 +1,14 @@
+import logging
 from typing import Optional
+
+from constants import NO_SOLUTION_MSG
+from input_validity_checker import check_input_validity
 from order import Order
 from order_info_transfomer import transform_order_info
 from recipe_maker import prepare_curry
-from input_validity_checker import check_input_validity
 from utils.argument_parser import parse_args_and_load_vars
 from utils.reader.text_file_reader import TextFileReader
-from constants import NO_SOLUTION_MSG
-import logging
+
 logging.basicConfig(level=logging.DEBUG)
 
 
@@ -31,4 +33,3 @@ if __name__ == '__main__':
     else:
         logging.info("Final Curry list is :-")
         logging.info(" ".join(result))
-
