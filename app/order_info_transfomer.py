@@ -25,7 +25,7 @@ def transform_order_info(lines, total_recipe, total_customer) -> Order:
     veg_preference = {}
 
     for idx in range(1, len(lines)):
-        customers_info[idx], meat_preference, veg_preference = \
-            prepare_choices(lines[idx], idx, meat_preference, veg_preference)
+        customers_info[idx], meat_preference, veg_preference = prepare_choices(lines[idx], idx,
+                                                                               meat_preference, veg_preference)
 
     return Order(customers_info, meat_preference, veg_preference, total_recipe, total_customer)

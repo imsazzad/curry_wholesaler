@@ -5,10 +5,11 @@ from constants import VEGETARIAN, MEAT
 from curry_info import CurryInfo
 from customer_info import CustomerInfo
 from order import Order
+
 logging.basicConfig(level=logging.DEBUG)
 
 
-def get_next_customer(customers_info:dict) -> CustomerInfo:
+def get_next_customer(customers_info: dict) -> CustomerInfo:
     next_customer = CustomerInfo()
     for key in customers_info:
         if len(customers_info[key]) < next_customer.num_of_preference:
@@ -21,8 +22,8 @@ def get_next_curry_number(current_customer_info) -> CurryInfo:
     next_curry_info = CurryInfo()
     for current_curry_number in current_customer_info:
         current_curry_name = current_customer_info[current_curry_number]
-        can_replace_next_curry = not next_curry_info.curry_name or \
-                                 (current_curry_name == VEGETARIAN and next_curry_info.curry_name == MEAT)
+        can_replace_next_curry = not next_curry_info.curry_name or (current_curry_name == VEGETARIAN
+                                                                    and next_curry_info.curry_name == MEAT)
         if can_replace_next_curry:
             next_curry_info = CurryInfo(curry_number=current_curry_number, curry_name=current_curry_name)
 
@@ -104,7 +105,7 @@ def get_happy_customers_id(curry_name, next_curry_info, order):
     return happy_customer_ids
 
 
-def log_updated_information(happy_customer:int, order:Order):
+def log_updated_information(happy_customer: int, order: Order):
     logging.debug("customers info - {} - num of customer- {}".format(order.customers_info, len(order.customers_info)))
     logging.debug("meat pref- {} ".format(order.meat_preference))
     logging.debug("veg pref- {} ".format(order.veg_preference))
