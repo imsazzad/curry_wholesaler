@@ -8,6 +8,6 @@ def parse_args_and_load_vars():
 
     args = parser.parse_args()
     if not args.input_file:
-        args.input_file = "../input1.txt"
+        args.input_file = "../data/input3.txt"
 
     return args
