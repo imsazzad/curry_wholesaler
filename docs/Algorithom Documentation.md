@@ -87,6 +87,7 @@ Here are the 3 dictionaries and other variables update on each iteration
 - So I will try to make it more readable and clean whenever possible. 
 - Though the test coverage is **100** percent, But I did not write tests for all module/methods.
 - Writing more tests should be the next improvement target
+- No docstring on module level.
 - **Concurrency** - This code currently does not support concurrency. If huge customers come it will fail. 
 - **Parallelism** - current code does not support Parallelism. Though I am Not sure if it is possible for this solution.
 - **Memory** - python dict gets memory from os, if customer size huge and you have not enough memory, the code will not work. 
