@@ -1,5 +1,5 @@
+from app.order.orders import Order
 from constants import MEAT
-from order import Order
 
 
 def prepare_choices(a_customer_choice: str, customer_id: int, meat_pref: dict, veg_pref: dict):

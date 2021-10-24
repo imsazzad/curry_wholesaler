@@ -1,11 +1,11 @@
 import logging
 from typing import Optional
 
+from app.order.orders import Order
 from constants import NO_SOLUTION_MSG
-from input_validity_checker import check_input_validity
-from order import Order
-from order_info_transfomer import transform_order_info
 from curry_maker import prepare_curry
+from input_validity_checker import check_input_validity
+from order.order_info_transfomer import transform_order_info
 from utils.argument_parser import parse_args_and_load_vars
 from utils.reader.text_file_reader import TextFileReader
 
