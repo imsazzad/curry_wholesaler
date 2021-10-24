@@ -1,4 +1,4 @@
-from input_validity_checker import check_input_validity
+from input_validator import check_input_validity
 
 
 def test_check_input_validity_when_input_is_none_is_invalid_input_is_true():
