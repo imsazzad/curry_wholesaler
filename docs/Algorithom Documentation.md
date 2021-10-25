@@ -17,6 +17,12 @@
 
 ## Scripts
 - main.py
+run one of following commands from project root
+
+`python3 app/main.py -f data/input1.txt`
+
+`python3 app/main.py -f data/input4.txt`
+
 
 ## How I solve the problem ( Main algorithm)
 1. From input 3 dictionary is made to make search and update faster. [ O(1) time]
@@ -80,7 +86,7 @@ Here are the 3 dictionaries and other variables update on each iteration
 
 ## Issue faced
 - No technical issue faced. Because technically it is easy problem.
-- But issue faced on structuring the problem to human-readable format 
+- But issue faced on structuring the code to human-readable format 
 
 ## Next improvement target
 - To be honest, I am not happy yet with the module/class/ methods I made to make it readable.

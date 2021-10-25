@@ -9,10 +9,12 @@ Please Read the **docs/Algorithom Documentation.md** to get details about
 
 ## How to run Training
 run one of following commands from project root
-- -f for input file
 
 `python3 app/main.py -f data/input1.txt`
+
 `python3 app/main.py -f data/input4.txt`
+
+**-f for input file**
 
 
 Folder Structure
@@ -21,9 +23,9 @@ Folder Structure
 ### top-level directory layout
 
     .
-    ├── app                     # all the source code to run the curry wholesaler
-    ├── data                    # sample input data
-    ├── docs                    # Documentation details about the main algorithm
+    ├── app                     # this module has all the source code to run the curry wholesaler
+    ├── data                    # this folder has sample input data
+    ├── docs                    # this folder has documentation details about the main algorithm
     ├── test                    # unit tests folder
     ├── venv                    # python and dependencies                 
     ├── .gitignore              # gitignore                  
@@ -37,9 +39,9 @@ Folder Structure
     ├── ...
     ├── app
     │   ├── __init__.py             
-    │   ├── curry               # all curry related methods, codes
-    │   ├── customer            # all customer related methods, codes        
-    │   ├── order               # all order/preference related methods, codes
+    │   ├── curry               # this module has all curry related methods, codes
+    │   ├── customer            # this module has all customer related methods, codes        
+    │   ├── order               # this module has all order/preference related methods, codes
     │   ├── utils               # argument parser, txt file reader
     │   ├── constants.py        # constants and msg
     │   ├── input_validator.py  # checks if valid input data or not
